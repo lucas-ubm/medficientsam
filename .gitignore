@@ -156,6 +156,7 @@ configs/local/default.yaml
 
 # Docker
 seno.tar.gz
+docker/
 
 # Cached compiled OpenVINO models
 *.blob

@@ -44,6 +44,15 @@ The Docker images can be found [here](https://drive.google.com/drive/folders/18l
 docker load -i seno.tar.gz
 docker container run -m 8G --name seno --rm -v $PWD/test_input/:/workspace/inputs/ -v $PWD/test_output/:/workspace/outputs/ seno:latest /bin/bash -c "sh predict.sh"
 ```
+To run on Mac OS ARM I needed to install QEMU: 
+```
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+```
+and then modify the command to:
+```
+docker load -i docker/<chosen_image>/seno.tar.gz
+docker container run -m 8G --name seno --rm -v $PWD/test_input/:/workspace/inputs/ -v $PWD/test_output/:/workspace/outputs/ --platform linux/amd64 seno:latest /bin/bash -c "sh predict.sh"
+```
 
 To measure the running time (including Docker starting time), see https://github.com/bowang-lab/MedSAM/blob/LiteMedSAM/CVPR24_time_eval.py
 
